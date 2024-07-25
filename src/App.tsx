@@ -1,13 +1,13 @@
 import './App.css'
-import { Button } from 'antd';
+import Login from './Pages/Auth/Login';
 function App() {
 
   return (
     <>
-      <Button type="primary">Primary Button</Button>
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+   
+    <Login></Login>
+    
+
     </>
   )
 }
