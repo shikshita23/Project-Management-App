@@ -1,11 +1,7 @@
 body{
-    background: rgb(94,114,228);
-    background-image: linear-gradient(
-        to bottom,
-        rgba(100,111,228,1) 10%,
-        rgba(130,95,228,1)30%,
-        #172b4d 100%
-
-    );
+   
+   /* background: "rgba(23, 43, 77, 1)" */
+    background-color: rgba(23, 43, 77, 0.1);
+    
 /* height: 100vh; */
 }

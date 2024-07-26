@@ -56,6 +56,10 @@ const CustomThemeContext = ({children}:customeProps) => {
                 defaultHoverBorderColor: "green",
                 defaultHoverColor: "white"
               },
+              Input:{
+                hoverBorderColor:"#172b4d",
+                activeBorderColor:"#172b4d"
+              }
           }}}
         >
           {children}

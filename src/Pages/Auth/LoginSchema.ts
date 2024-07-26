@@ -8,4 +8,6 @@ export const schema= yup.object({
     
     password:yup.string()
     .required("password is required")
+    .min(8)
+    
 })

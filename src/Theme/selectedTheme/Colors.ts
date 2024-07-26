@@ -2,7 +2,7 @@ export const Colors = {
     primary: {
       p1: '#F2EBF9',
       p2: '#DDCCEF',
-      p3: 'red', // default
+      p3: '#172b4d', // default
       p4: '#4B01A0', // hover
       p5: '#3E0185',
       p6: '#32016A',
