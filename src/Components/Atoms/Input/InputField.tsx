@@ -1,35 +1,66 @@
 import React from "react";
 import { Input } from "antd";
-import { ControllerRenderProps } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
+import { SizeType } from "antd/es/config-provider/SizeContext";
 
 interface InputProps{
-    error?: string;
+    errors?: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    field:ControllerRenderProps <any>;
-    size?:'large' | 'default' | 'small';
+    // field:ControllerRenderProps <any>;
+    size?:SizeType;
     placeholder?: string; 
     prefix?: React.ReactNode;
     type:string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    control:any;
+    name: string;
 }
-const InputField:React.FC<InputProps>=(
+const InputField:React.FC<InputProps> = (
     {
-        field,
-        error,
+        // field,
+        control,
+        errors,
         size = 'default',
         placeholder = 'Enter', 
         prefix,
-        type="text" 
+        type="text",
+        name
     }
 )=>(<div className="email mb-4">
+  {!control&&(
+
     <Input
-      {...field}
+      // {...field}
+      control={control}
       size={size}
       placeholder={placeholder}
       type={type}
       prefix={prefix}
       className="ps-2"
     />
-    {error && <p className="text-[red]">{error}</p>}
+  )}
+  {control&&(
+
+    <Controller
+      // {...field}
+      name={name}
+      control={control}
+      render={({field})=>{
+        return(
+          <Input
+          {...field}
+          size={size}
+          placeholder={placeholder}
+          type={type}
+          prefix={prefix}
+          className="ps-2"
+          />
+        )
+      }}
+    />
+  )}
+
+    {errors && <p className="text-[red]">{errors}</p>}
   </div>
 
 );

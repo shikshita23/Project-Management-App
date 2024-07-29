@@ -1,4 +1,4 @@
-import { Controller, useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { MailOutlined, LockFilled } from "@ant-design/icons";
 import { Checkbox, Button, Card } from "antd";
@@ -13,14 +13,12 @@ import { useEffect } from "react";
 type formValues = {
 	email: string;
 	password: string;
-	username: string;
 };
 export default function Login() {
 	const onChange: CheckboxProps["onChange"] = (e) => {
 		console.log(`checked = ${e.target.checked}`);
 	};
 	const {
-		register,
 		control,
 		handleSubmit,
 		watch,
@@ -63,37 +61,38 @@ export default function Login() {
 
 				<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
 					<div className="email mb-4">
-						<Controller
+						{/* <Controller
 							control={control}
 							name="ReactDatepicker"
 							{...register("email")}
-							render={({ field }) => (
+							render={({ field }) => ( */}
 								<InputField
-									field={field}
-									error={errors.email?.message}
+									errors={errors.email?.message}
 									size="large"
 									type="email"
 									placeholder="Enter your email"
 									prefix={<MailOutlined />}
+									control={control}
+									name={'email'}
 								/>
-							)}
-						/>
+							{/* )} */}
+						{/* /> */}
 					</div>
 					<div className="password mb-4">
-						<Controller
+						{/* <Controller
 							control={control}
-							name="ReactDatepicker"
 							{...register("password")}
-							render={({ field }) => (
+							render={({ field }) => ( */}
 								<PasswordInput
-									field={field}
-									error={errors.password?.message}
+									errors={errors.password?.message}
 									size="large"
 									placeholder="Enter your password"
 									prefix={<LockFilled />}
+									control={control}
+									name={'password'}
 								/>
-							)}
-						/>
+							{/* )}
+						/> */}
 					</div>
 					<Checkbox onChange={onChange} className="mb-4">
 						Remember me
