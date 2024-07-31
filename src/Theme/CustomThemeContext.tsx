@@ -59,6 +59,9 @@ const CustomThemeContext = ({children}:customeProps) => {
               Input:{
                 hoverBorderColor:"#172b4d",
                 activeBorderColor:"#172b4d"
+              },
+              Menu:{
+                itemActiveBg:"red"
               }
           }}}
         >

@@ -1,18 +1,16 @@
 import React from "react";
 import { Input } from "antd";
-import { Controller } from 'react-hook-form';
+import { Controller, Control } from 'react-hook-form';
 import { SizeType } from "antd/es/config-provider/SizeContext";
 
 interface InputProps{
     errors?: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    // field:ControllerRenderProps <any>;
     size?:SizeType;
     placeholder?: string; 
     prefix?: React.ReactNode;
     type:string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    control:any;
+    control: Control<any>;
     name: string;
 }
 const InputField:React.FC<InputProps> = (

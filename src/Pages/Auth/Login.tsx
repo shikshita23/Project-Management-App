@@ -2,26 +2,32 @@ import {  useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { MailOutlined, LockFilled } from "@ant-design/icons";
 import { Checkbox, Button, Card } from "antd";
+import {useNavigate} from "react-router-dom";
 import type { CheckboxProps } from "antd";
+import axios from "axios";
+
+// import { usePostLogin } from "./Common/usePostLogin";
 import InputField from "../../Components/Atoms/Input/InputField";
 import PasswordInput from "../../Components/Atoms/Input/PasswordInput";
 import { schema } from "./LoginSchema";
 import "../../Theme/Css/Login.css";
 
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 type formValues = {
 	email: string;
 	password: string;
 };
+
 export default function Login() {
+	const navigate= useNavigate();
 	const onChange: CheckboxProps["onChange"] = (e) => {
 		console.log(`checked = ${e.target.checked}`);
 	};
 	const {
 		control,
 		handleSubmit,
-		watch,
+		// watch,
 		formState: { errors },
 	} = useForm<formValues>({
 		defaultValues: {
@@ -30,17 +36,47 @@ export default function Login() {
 		},
 		resolver: yupResolver(schema),
 	});
+	// const onSuccess =()=>{
+	// 	console.log("doneeeeee")
+	// }
+	// const {mutation}=usePostLogin(onSuccess);
+	const onSubmit = async (data: formValues) => {
+		try{
+			console.log("done", data); 
+			console.log("submitted");
+			// mutation.mutate(data);
 
-	const onSubmit = (data: formValues) => {
-		console.log("done", data); 
+			const res = await axios.post(
+				"https://trout-romantic-broadly.ngrok-free.app/login",
+				data
+			);
+			console.log("response==>", res);
+			if (res) {
+				localStorage.setItem("access_token", res?.data?.access_token);
+				// localStorage.setItem("refresh_token",res?.data?.refresh_token);
+				console.log("the token ==>", res.data.access_token);
+				navigate("/registration");
+			}
+
+		}catch(error){
+			console.log(error);
+			// notifyLoginFailed("login failed");
+
+		}
 	};
+	const onError=()=>{
+		console.log("error occured")
 
-	useEffect(() => {
-		const subscription = watch((value, { name, type }) =>
-			console.log(value, name, type)
-		);
-		return () => subscription.unsubscribe();
-	}, [watch]);
+	};
+	const handleCreate=()=>{
+		navigate("/register")
+	}
+	// useEffect(() => {
+	// 	const subscription = watch((value, { name, type }) =>
+	// 		console.log(value, name, type)
+	// 	);
+	// 	return () => subscription.unsubscribe();
+	// }, [watch]);
 
 	return (
 		<>
@@ -51,6 +87,7 @@ export default function Login() {
 					margin: "100px auto 0",
 					boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
 				}}
+				
 			>
 				<div
 					style={{ fontFamily: "'Anton', sans-serif" }}
@@ -59,7 +96,7 @@ export default function Login() {
 					Sign In
 				</div>
 
-				<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+				<form onSubmit={handleSubmit(onSubmit,onError)} className="flex flex-col">
 					<div className="email mb-4">
 						{/* <Controller
 							control={control}
@@ -101,12 +138,14 @@ export default function Login() {
 						style={{ backgroundColor: "#172b4d", color: "white" }}
 						htmlType="submit"
 					>
-						Login
+					Login
 					</Button>
+					
+					
 				</form>
 				<div className=" flex justify-between mt-12">
 					<div>Forgot password?</div>
-					<div>Create new account</div>
+					<div onClick={()=>{handleCreate()}} style={{cursor:"pointer"}}>Create new account</div>
 				</div>
 			</Card>
 		</>
