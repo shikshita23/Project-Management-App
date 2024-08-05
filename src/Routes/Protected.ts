@@ -16,7 +16,7 @@
 //     const access_token = localStorage.getItem("access_token");
 //     if (access_token) {
 //       try {
-//         const decoded = jwtDecode<DecodedToken>(access_token);
+//         const decoded = jwtDecode(access_token);
 //         const isExpired = dayjs.unix(decoded.exp).isBefore(dayjs());
 //         console.log(isExpired, "expire status");
 //         setDecodedToken(decoded);
@@ -34,7 +34,7 @@
 
 //   const access_token = localStorage.getItem("access_token");
 
-//   return access_token ? <Outlet /> : <Navigate to="/"/>;
+//   return access_token? <Outlet/> : <Navigate to="/"/>;
 // };
 
 // export default Protected;

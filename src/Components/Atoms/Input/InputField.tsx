@@ -9,9 +9,11 @@ interface InputProps{
     placeholder?: string; 
     prefix?: React.ReactNode;
     type:string;
+    width?:string |number;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     control: Control<any>;
     name: string;
+    className?:string;
 }
 const InputField:React.FC<InputProps> = (
     {
@@ -22,11 +24,11 @@ const InputField:React.FC<InputProps> = (
         placeholder = 'Enter', 
         prefix,
         type="text",
-        name
+        name,
+        className,
     }
-)=>(<div className="email mb-4">
+)=>(<div className="email w-[100%]">
   {!control&&(
-
     <Input
       // {...field}
       control={control}
@@ -34,11 +36,10 @@ const InputField:React.FC<InputProps> = (
       placeholder={placeholder}
       type={type}
       prefix={prefix}
-      className="ps-2"
+      className={className}
     />
   )}
   {control&&(
-
     <Controller
       // {...field}
       name={name}
@@ -51,7 +52,7 @@ const InputField:React.FC<InputProps> = (
           placeholder={placeholder}
           type={type}
           prefix={prefix}
-          className="ps-2"
+          className={className}
           />
         )
       }}

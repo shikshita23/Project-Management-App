@@ -62,7 +62,7 @@ export default function Registration() {
 			>
 				<div
 					style={{ fontFamily: "'Anton', sans-serif" }}
-					className=" relative bottom-14 p-5 rounded-md text-white text-xl bg-[#172b4d]"
+					className="flex justify-center relative bottom-14 p-5 rounded-md text-white text-xl bg-[#172b4d]"
 				>
 					REGISTRATION
 				</div>

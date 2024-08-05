@@ -6,7 +6,6 @@ import {useNavigate} from "react-router-dom";
 import type { CheckboxProps } from "antd";
 import axios from "axios";
 
-// import { usePostLogin } from "./Common/usePostLogin";
 import InputField from "../../Components/Atoms/Input/InputField";
 import PasswordInput from "../../Components/Atoms/Input/PasswordInput";
 import { schema } from "./LoginSchema";
@@ -55,7 +54,7 @@ export default function Login() {
 				localStorage.setItem("access_token", res?.data?.access_token);
 				// localStorage.setItem("refresh_token",res?.data?.refresh_token);
 				console.log("the token ==>", res.data.access_token);
-				navigate("/registration");
+				navigate("/home");
 			}
 
 		}catch(error){
@@ -91,7 +90,7 @@ export default function Login() {
 			>
 				<div
 					style={{ fontFamily: "'Anton', sans-serif" }}
-					className=" relative bottom-14 p-5 rounded-md text-white text-xl bg-[#172b4d]"
+					className="flex justify-center relative bottom-14 p-5 rounded-md text-white text-xl bg-[#172b4d]"
 				>
 					Sign In
 				</div>

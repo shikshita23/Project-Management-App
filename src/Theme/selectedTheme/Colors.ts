@@ -14,14 +14,15 @@ export const Colors = {
       b2: '#FAF9FB',
       b3: '#F5F4F6',
       b4: '#EDEBEE',
-      b5:'#636fe4'
+      b5:'#636fe4',
+      b6:"#f5f5f5"
     },
     stroke: {
       s1: '#E5E4E7',
       s2: '#CBC9CF',
     },
     text: {
-      t1: '#fff', // always white
+      t1: '#fff',    // always white
       t2: '#99949E', // disabled
       t3: '#66616B', // component2
       t4: '#4D4950', // paragraph

@@ -1,4 +1,3 @@
-
 import { Layout,Button, theme } from 'antd';
 import {
     MenuFoldOutlined,
@@ -22,9 +21,7 @@ const Headers:React.FC<headerProps> = ({collapse}) => {
         collapse();
         setCol(!col)
     }
-   
   return (
-
     <>
         <Header style={{ padding: 0, background: colorBgContainer,display:"flex",justifyContent:"space-between",alignItems:"center" }}>
           <Button
