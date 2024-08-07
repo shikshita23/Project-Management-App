@@ -8,27 +8,34 @@ import { usePostProj } from './common/usePostProj';
 import { Button } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCalendar} from '@fortawesome/free-solid-svg-icons';
-import Projects from "../../Theme/Css/Project.css";
+import type { InputNumberProps } from 'antd';
+import { InputNumber } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import '../../Theme/Css/Project.css'
 type ProjectForm = {
   project_name: string;
   project_description: string;
   start_date: Date | null; 
-  end_date: Date | null;   
+  end_date: Date | null;  
+  owner_id:number; 
 };
 
 const Project = () => {
+  const navigate=useNavigate();
   const { control, handleSubmit } = useForm<ProjectForm>({
     defaultValues: {
       project_name:"",
       project_description:"",
       start_date:null,
-      end_date:null
+      end_date:null,
+      owner_id:1,
     },
     resolver: yupResolver(schema),
   });
 
   const onSuccess = () => {
     console.log('created successfully');
+    navigate('/project')
   };
 
   const { mutation } = usePostProj(onSuccess);
@@ -36,13 +43,18 @@ const Project = () => {
   const onSubmit = async (data: ProjectForm) => {
     const formattedData = {
       ...data,
-      start_date: data.start_date ? data.start_date.toISOString().split('T')[0] : '', // Convert to yyyy-mm-dd
-      end_date: data.end_date ? data.end_date.toISOString().split('T')[0] : ''     // Convert to yyyy-mm-dd
+      start_date: data.start_date ? data.start_date.toISOString().split('T')[0] : '', 
+      end_date: data.end_date ? data.end_date.toISOString().split('T')[0] : ''  
     };
     console.log('formattedData', formattedData);
     mutation.mutate(formattedData);
   };
-
+  const onChange: InputNumberProps['onChange'] = (value) => {
+    console.log('changed', value);
+  };
+  const handleCancel=()=>{
+    navigate('/project')
+  }
   return (
     <div className='flex justify-center relative'>
       <div className='absolute top-[25px] left-[80px] flex w-[65px] h-[65px] justify-center items-center rounded bg-zinc-300	'>
@@ -54,15 +66,14 @@ const Project = () => {
     >
       <div className="text-2xl font-bold text-center mb-5 absolute top-[65px] left-[165px]">New Project</div>
       <div className="flex flex-col ">
-        <div className=" items-center justify-between   p-[0.5rem] mt-[65px] relative">
-          {/* <label className="inline w-[8rem] focus:absolute top-30">Project Name:</label> */}
+        <div className=" input-field-div items-center justify-between   p-[0.5rem] mt-[65px] relative">
+          <label className="inline project-label w-[8rem]">Project Name:</label>
           <InputField
             control={control}
             name="project_name"
             type="text"
             size="large" 
-            className="mt-5 border-0 border-b-2 border-gray-200  hover:border-red-500 rounded-none focus:placeholder-transparent " 
-            placeholder='Project Name' 
+            className="mt-5 inputFields border-0 border-b-2   rounded-none focus:placeholder-transparent "           
           />
         </div>
       </div>
@@ -77,6 +88,14 @@ const Project = () => {
             row={3}
           />
         </div>
+      </div>
+      <br />
+      <br />
+      <div className="flex flex-col ">
+        <div className=" flex  flex-col  p-[0.5rem] ">
+          <label className="inline w-[8rem] mb-4 ">Owner Id</label>
+          <InputNumber min={1} max={5} defaultValue={1} onChange={onChange} />
+      </div>
       </div>
       <br />
       <br />
@@ -102,7 +121,10 @@ const Project = () => {
       </div>
       <br />
       <br />
-      <Button  htmlType='submit' className='m-auto'>Create</Button>
+      <div className='flex justify-end'>
+        <Button onClick={handleCancel} className='px-9 font-medium me-7'>Cancel</Button>
+        <Button  htmlType='submit' type='primary' className='px-9 font-medium' >Create</Button>
+      </div>
 
     </form>
     </div>

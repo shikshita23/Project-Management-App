@@ -138,9 +138,7 @@ export default function Login() {
 						htmlType="submit"
 					>
 					Login
-					</Button>
-					
-					
+					</Button>					
 				</form>
 				<div className=" flex justify-between mt-12">
 					<div>Forgot password?</div>

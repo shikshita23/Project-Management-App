@@ -19,7 +19,7 @@ const CustomThemeContext = ({children}:customeProps) => {
                 colorError: SelectedTheme.Colors.error.e3,
                 colorInfo: SelectedTheme.Colors.link.l3,
                 colorWarning: SelectedTheme.Colors.warning.w3,
-                colorText: SelectedTheme.Colors.text.t4,
+                colorText: SelectedTheme.Colors.text.t7,
                 colorTextDisabled: SelectedTheme.Colors.text.t2,
                 // colorBgBase:SelectedTheme.Colors.background.b5,
       
@@ -36,7 +36,8 @@ const CustomThemeContext = ({children}:customeProps) => {
                   paddingInlineSM: 12,
                   paddingInline: 14,
                   paddingInlineLG: 16,
-                  defaultBorderColor:"green",
+                  defaultBorderColor:"#f0f2f5",
+                  defaultBg:'#f0f2f5',
                   // border
                   borderRadiusSM: 10,
                   borderRadius: 11,
@@ -55,13 +56,14 @@ const CustomThemeContext = ({children}:customeProps) => {
                   onlyIconSizeLG: 24,
                   marginXS: 6,
                   // default hover
-                  defaultHoverBg: "blue",
-                  defaultHoverBorderColor: "green",
-                  defaultHoverColor: "white"
+                  defaultHoverBg: "#dcdcdc",
+                   defaultHoverBorderColor: "none",
+                  // defaultHoverColor: "white"
                 },
                 Input:{
                   hoverBorderColor:"#172b4d",
-                  activeBorderColor:"#172b4d"
+                  activeBorderColor:"#172b4d",
+                  
                 },
                 Menu:{
                   itemActiveBg:"red"

@@ -28,6 +28,7 @@ export const Colors = {
       t4: '#4D4950', // paragraph
       t5: '#333036', // component
       t6: '#1A181B', // headers
+      t7: '#000000'
     },
     link: {
       l1: '#EBF5FF',

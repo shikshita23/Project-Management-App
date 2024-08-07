@@ -26,7 +26,6 @@ const Dates: React.FC<DateProps> = ({
       control={control}
       render={({field})=>
       {
-        
         return(
           <DatePicker 
             {...field}

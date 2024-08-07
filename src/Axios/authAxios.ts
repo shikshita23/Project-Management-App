@@ -4,12 +4,12 @@ import { BASE_URL } from '../Constant/constant'
 const access_token=localStorage.getItem("access_token")
 console.log("access_token>>>",access_token)
 
-const axiosAuth = axios.create({
+const authAxios = axios.create({
     baseURL: BASE_URL,
     // timeout: 1000,
   });
 
-axiosAuth.interceptors.request.use(function (config) {
+authAxios.interceptors.request.use(function (config) {
     config.headers['Authorization'] = `Bearer ${access_token}`;
     config.headers['ngrok-skip-browser-warning'] = 'false';
     // Do something before request is sent
@@ -20,7 +20,7 @@ axiosAuth.interceptors.request.use(function (config) {
   });
 
 // Add a response interceptor
-axiosAuth.interceptors.response.use(function (response) {
+authAxios.interceptors.response.use(function (response) {
     console.log("response>>>",response)
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
@@ -35,4 +35,4 @@ axiosAuth.interceptors.response.use(function (response) {
     return Promise.reject(error);
   });
 
-export default axiosAuth;
+export default authAxios;

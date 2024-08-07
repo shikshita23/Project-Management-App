@@ -3,6 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { MailOutlined, LockFilled,UserOutlined } from "@ant-design/icons";
 import { Checkbox, Button, Card } from "antd";
 import type { CheckboxProps } from "antd";
+import axios from "axios";
 
 import InputField from "../../Components/Atoms/Input/InputField";
 import PasswordInput from "../../Components/Atoms/Input/PasswordInput";
@@ -35,11 +36,30 @@ export default function Registration() {
 		},
 		resolver: yupResolver(schema),
 	});
+	const onSubmit = async (data: formValues) => {
+		try{
+			console.log("done", data); 
+			console.log("submitted");
+			// mutation.mutate(data);
 
-	const onSubmit = (data: formValues) => {
-		console.log("done", data); 
+			const res = await axios.post(
+				"https://trout-romantic-broadly.ngrok-free.app/register",
+				data
+			);
+			console.log("response==>", res);
+			if (res) {
+				localStorage.setItem("access_token", res?.data?.access_token);
+				// localStorage.setItem("refresh_token",res?.data?.refresh_token);
+				console.log("the token ==>", res.data.access_token);
+				navigate("/");
+			}
+
+		}catch(error){
+			console.log(error);
+			// notifyLoginFailed("login failed");
+
+		}
 	};
-
 	useEffect(() => {
 		const subscription = watch((value, { name, type }) =>
 			console.log(value, name, type)
@@ -69,11 +89,6 @@ export default function Registration() {
 
 				<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
 					<div className="username mb-4">
-						{/* <Controller
-							control={control}
-							name="ReactDatepicker"
-							{...register("username")}
-							render={({ field }) => ( */}
 								<InputField
 									errors={errors.username?.message}
 									size="large"
@@ -83,15 +98,8 @@ export default function Registration() {
 									name={'username'}
 									control={control}
 								/>
-							{/* )}
-						/> */}
 					</div>
 					<div className="email mb-4">
-						{/* <Controller
-							control={control}
-							name="ReactDatepicker"
-							{...register("email")}
-							render={({ field }) => ( */}
 								<InputField
 									// field={field}
 									errors={errors.email?.message}
@@ -102,15 +110,8 @@ export default function Registration() {
 									control={control}
 									name={'email'}
 								/>
-							{/* )}
-						/> */}
 					</div>
 					<div className="password mb-4">
-						{/* <Controller
-							control={control}
-							name="ReactDatepicker"
-							{...register("password")}
-							render={({ field }) => ( */}
 								<PasswordInput
 									// field={field}
 									errors={errors.password?.message}
@@ -120,8 +121,6 @@ export default function Registration() {
 									control={control}
 									name={'password'}
 								/>
-							{/* )}
-						/> */}
 					</div>
 					<Checkbox onChange={onChange} className="mb-4">
 					I agree the Terms and Conditions

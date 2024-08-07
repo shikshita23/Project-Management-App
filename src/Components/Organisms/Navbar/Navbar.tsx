@@ -9,9 +9,12 @@ export default function Navbar(){
 		localStorage.removeItem("refresh_token");
 		navigate("/");
 	}; 
+  const handleProfile = () => {
+		navigate("/profile");
+	}; 
   const items: MenuProps['items'] = [
        {
-         label: <a href="https://www.antgroup.com">Profile</a>,
+         label: <a onClick={handleProfile}>Profile</a>,
          key: '0',
        },
        {

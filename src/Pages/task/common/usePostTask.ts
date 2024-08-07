@@ -10,7 +10,7 @@ export const usePostProj = (onSuccess: any) => {
 		console.log("data after creating", data);
 		try {
 			// const res = await axiosNoAuth.post("/user", data);
-			const res = await authAxios.post("/projects/add", data);
+			const res = await authAxios.post("/tasks/add", data);
 			return res.data;
 		} catch (error) {
 			console.log("Error fetching data:", error);

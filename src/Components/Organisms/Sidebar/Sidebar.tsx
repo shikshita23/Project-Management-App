@@ -3,7 +3,8 @@ import {
     HomeOutlined,
     CheckCircleOutlined,
     FolderOutlined,
-    ProjectOutlined
+    ProjectOutlined,
+    PlusOutlined
     
   } from '@ant-design/icons'
 import React from 'react';
@@ -68,7 +69,7 @@ export default function Sidebar({collapsed}:siderProps){
     console.log("collapse>>",collapsed)
     return (
         <>
-            <Sider trigger={null} theme='light'  collapsible collapsed={collapsed}>
+            <Sider trigger={null} theme='light'  collapsible collapsed={collapsed} className='h-auto'>
             <div className="demo-logo-vertical" />        
         <Menu
               mode="inline"

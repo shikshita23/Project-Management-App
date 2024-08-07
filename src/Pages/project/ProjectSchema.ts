@@ -10,12 +10,13 @@ export const schema= yup.object({
     .required("Description is required")
     .min(10),
 
-    // owner_id:yup.number()
-    // .required("required")
-
     start_date:yup.date()
     .required("Start date is required"),
     
     end_date:yup.date()
-    .required("Ends date is required")    
+    .required("Ends date is required"),
+        
+    owner_id:yup.number()
+    .required("required"),
+
 })
