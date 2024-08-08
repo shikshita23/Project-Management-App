@@ -67,7 +67,19 @@ const CustomThemeContext = ({children}:customeProps) => {
                 },
                 Menu:{
                   itemActiveBg:"red"
-                }
+                },
+                InputNumber:{
+                  activeShadow:"none",
+                  activeBorderColor:"blue",
+                  colorBorder:"none",
+                },
+                Select:{
+                  optionActiveBg:"none",
+                  optionSelectedBg:"none",
+                  selectorBg:"none",
+                  colorBorder:"none",
+                  controlOutlineWidth	:0,
+               }
             }}}
           >
             {children}

@@ -4,9 +4,9 @@ import authAxios from "../../../Axios/authAxios";
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const usePostProj = (onSuccess: any) => {
+export const usePostTask = (onSuccess: any) => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const postProj = async (data: any) => {
+	const postTask = async (data: any) => {
 		console.log("data after creating", data);
 		try {
 			// const res = await axiosNoAuth.post("/user", data);
@@ -16,7 +16,7 @@ export const usePostProj = (onSuccess: any) => {
 			console.log("Error fetching data:", error);
 		}
 	};
-	const mutation = useMutation(postProj, {
+	const mutation = useMutation(postTask, {
 		onSuccess,
 	});
 	return {
