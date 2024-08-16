@@ -43,14 +43,14 @@ const items: MenuItem[] = [
       getItem(<Link to="/task">My task</Link>, '2', <CheckCircleOutlined />),
     ],
   },
-  {
-    type:'group',
-    label:'Insights',
-    children:[
-      getItem(<Link to="/portfolio">Portfolio</Link>, '3', <FolderOutlined />),
-      getItem(<Link to="/report">Reports</Link>, '5', <FontAwesomeIcon icon={faChartLine} />),
-    ],
-  },
+  // {
+  //   type:'group',
+  //   label:'Insights',
+  //   children:[
+  //     getItem(<Link to="/portfolio">Portfolio</Link>, '3', <FolderOutlined />),
+  //     getItem(<Link to="/report">Reports</Link>, '5', <FontAwesomeIcon icon={faChartLine} />),
+  //   ],
+  // },
   // getItem('Portfolios', 'sub1', <FolderOutlined />, [
   //   getItem('portfolio 1', '3'),
   //   getItem('portfolio 2', '4'),

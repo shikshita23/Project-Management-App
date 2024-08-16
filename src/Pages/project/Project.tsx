@@ -1,16 +1,17 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './ProjectSchema';
-import InputField from '../../Components/Atoms/Input/InputField';
-import TextAreas from '../../Components/Atoms/Input/TextAreas';
-import Dates from '../../Components/Atoms/Input/Dates';
-import { usePostProj } from './common/usePostProj';
 import { Button } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCalendar} from '@fortawesome/free-solid-svg-icons';
 import type { InputNumberProps } from 'antd';
-import { InputNumber } from 'antd';
 import { useNavigate } from 'react-router-dom';
+
+import InputField from '../../Components/Atoms/Input/InputField';
+import { usePostProj } from './common/usePostProj';
+import moment from 'moment';
+import TextAreas from '../../Components/Atoms/Input/TextAreas';
+import Dates from '../../Components/Atoms/Input/Dates';
 import '../../Theme/Css/Project.css'
 type ProjectForm = {
   project_name: string;
@@ -34,24 +35,27 @@ const Project = () => {
   });
 
   const onSuccess = () => {
-    console.log('created successfully');
+    // console.log('project created successfully');
     navigate('/project')
   };
 
   const { mutation } = usePostProj(onSuccess);
 
   const onSubmit = async (data: ProjectForm) => {
+    console.log("on the way of submitings")
+    const formattedStartDate = moment(data.start_date).format('YYYY-MM-DD');
+    const formattedEndDate = moment(data.end_date).format('YYYY-MM-DD');
+
     const formattedData = {
       ...data,
-      start_date: data.start_date ? data.start_date.toISOString().split('T')[0] : '', 
-      end_date: data.end_date ? data.end_date.toISOString().split('T')[0] : ''  
+      start_date: formattedStartDate, 
+      end_date: formattedEndDate
     };
-    console.log('formattedData', formattedData);
     mutation.mutate(formattedData);
   };
-  const onChange: InputNumberProps['onChange'] = (value) => {
-    console.log('changed', value);
-  };
+  // const onChange: InputNumberProps['onChange'] = (value) => {
+  //   console.log('changed', value);
+  // };
   const handleCancel=()=>{
     navigate('/project')
   }
@@ -91,14 +95,7 @@ const Project = () => {
       </div>
       <br />
       <br />
-      <div className="flex flex-col ">
-        <div className=" flex  flex-col  p-[0.5rem] ">
-          <label className="inline w-[8rem] mb-4 ">Owner Id</label>
-          <InputNumber min={1} max={5} defaultValue={1} onChange={onChange} />
-      </div>
-      </div>
-      <br />
-      <br />
+      
       <div className="flex flex-col ">
         <div className="flex items-center justify-between w-[30rem] p-[0.5rem] ">
           <label className="inline w-[8rem]">Start Date:</label>

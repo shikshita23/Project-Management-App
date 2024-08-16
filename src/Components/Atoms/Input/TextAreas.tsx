@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Input } from 'antd';
 import { Controller, Control } from 'react-hook-form';
 
@@ -6,7 +7,7 @@ const { TextArea } = Input;
 
 interface TextProps {
   errors?: string;
-  placeholder?: string; 
+  placeholder?: string;
   row?: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<any>; // Type Control<any> is correct
@@ -16,7 +17,7 @@ interface TextProps {
 const TextAreas: React.FC<TextProps> = ({
   control,
   errors,
-  placeholder = 'Enter', 
+  placeholder = 'Enter',
   row = 4,
   name
 }) => (

@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Input } from "antd";
 import { MailOutlined } from "@ant-design/icons";
 import { Controller } from "react-hook-form";
@@ -38,7 +39,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
 				// {...field}
 				name={name}
 				control={control}
-				render={({field}) => {
+				render={({ field }) => {
 					return (
 						<Input.Password
 							{...field}

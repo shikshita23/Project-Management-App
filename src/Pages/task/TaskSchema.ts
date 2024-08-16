@@ -12,13 +12,12 @@ export const schema= yup.object({
      priority:yup.string(),
     // .required(),
     
-    assignee_id:yup.number()
+    assignee:yup.object()
     .required(),
         
     due_date:yup.date()
     .required(),
 
-    project_id:yup.number()
-    .required(),
-
+    // project_id:yup.number()
+    // .required(),
 })

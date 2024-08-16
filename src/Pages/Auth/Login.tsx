@@ -11,14 +11,14 @@ import PasswordInput from "../../Components/Atoms/Input/PasswordInput";
 import { schema } from "./LoginSchema";
 import "../../Theme/Css/Login.css";
 
-// import { useEffect } from "react";
-
+import { AuthHook } from "./Hook/useLoginHook";
 type formValues = {
-	email: string;
+	username: string;
 	password: string;
 };
 
 export default function Login() {
+	const {setOwnerId}=AuthHook();
 	const navigate= useNavigate();
 	const onChange: CheckboxProps["onChange"] = (e) => {
 		console.log(`checked = ${e.target.checked}`);
@@ -30,7 +30,7 @@ export default function Login() {
 		formState: { errors },
 	} = useForm<formValues>({
 		defaultValues: {
-			email: "",
+			username: "",
 			password: "",
 		},
 		resolver: yupResolver(schema),
@@ -45,15 +45,23 @@ export default function Login() {
 			console.log("submitted");
 			// mutation.mutate(data);
 
+
+			const {username,password}=data
+
+			const payload=new URLSearchParams({username:username, password:password})
+			console.log("payload==>",payload)
+
 			const res = await axios.post(
 				"https://trout-romantic-broadly.ngrok-free.app/login",
-				data
+				payload
 			);
 			console.log("response==>", res);
 			if (res) {
 				localStorage.setItem("access_token", res?.data?.access_token);
-				// localStorage.setItem("refresh_token",res?.data?.refresh_token);
+				localStorage.setItem("refresh_token",res?.data?.refresh_token);
 				console.log("the token ==>", res.data.access_token);
+
+				setOwnerId(res.data.owner_id);
 				navigate("/home");
 			}
 
@@ -76,7 +84,8 @@ export default function Login() {
 	// 	);
 	// 	return () => subscription.unsubscribe();
 	// }, [watch]);
-
+	// const username = watch('username', '')
+	// console.log(username)
 	return (
 		<>
 			<Card
@@ -96,20 +105,20 @@ export default function Login() {
 				</div>
 
 				<form onSubmit={handleSubmit(onSubmit,onError)} className="flex flex-col">
-					<div className="email mb-4">
+					<div className="username mb-4">
 						{/* <Controller
 							control={control}
 							name="ReactDatepicker"
 							{...register("email")}
 							render={({ field }) => ( */}
 								<InputField
-									errors={errors.email?.message}
+									errors={errors.username?.message}
 									size="large"
 									type="email"
-									placeholder="Enter your email"
+									placeholder="Enter your username"
 									prefix={<MailOutlined />}
 									control={control}
-									name={'email'}
+									name={'username'}
 								/>
 							{/* )} */}
 						{/* /> */}

@@ -1,5 +1,3 @@
-
-
 const Charts = () => {
   return (
     <div>

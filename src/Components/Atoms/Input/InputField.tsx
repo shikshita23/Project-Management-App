@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Input } from "antd";
 import { Controller, Control } from 'react-hook-form';
 import { SizeType } from "antd/es/config-provider/SizeContext";
@@ -14,6 +15,8 @@ interface InputProps{
     control: Control<any>;
     name: string;
     className?:string;
+    defaultValue?:string
+    disabled?:boolean
 }
 const InputField:React.FC<InputProps> = (
     {
@@ -26,6 +29,8 @@ const InputField:React.FC<InputProps> = (
         type="text",
         name,
         className,
+        defaultValue,
+        disabled
     }
 )=>(<div className="email w-[100%]">
   {!control&&(
@@ -37,6 +42,8 @@ const InputField:React.FC<InputProps> = (
       type={type}
       prefix={prefix}
       className={className}
+      defaultValue={defaultValue}
+      disabled={disabled}
     />
   )}
   {control&&(
@@ -53,6 +60,8 @@ const InputField:React.FC<InputProps> = (
           type={type}
           prefix={prefix}
           className={className}
+          defaultValue={defaultValue}
+          disabled={disabled}
           />
         )
       }}

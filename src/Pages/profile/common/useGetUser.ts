@@ -1,12 +1,10 @@
 import {  useQuery } from "react-query";
 import authAxios from "../../../Axios/authAxios";
-import { AuthHook } from "../../Auth/Hook/useLoginHook";
-export const useGetProj=()=>{
-    const {ownerId}=AuthHook();
-    console.log("value of owner id",ownerId)
-    const getProj=async ()=>{
+// import { AuthHook } from "../../Auth/Hook/useLoginHook";
+export const useGetUser=()=>{
+    const getUser=async ()=>{
         try{
-            const res=await authAxios.get(`/projects/show`,{
+            const res=await authAxios.get(`/users/me`,{
                 headers:{
                     Accept:"application/json",
                 },
@@ -19,8 +17,8 @@ export const useGetProj=()=>{
         }
     };
     const{isLoading,error,data,refetch}=useQuery({
-        queryKey:["getProj"],
-        queryFn:getProj,
+        queryKey:["getUser"],
+        queryFn:getUser,
     });
     return{
         isLoading,

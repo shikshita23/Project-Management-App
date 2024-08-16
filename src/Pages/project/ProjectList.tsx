@@ -43,6 +43,7 @@ export default function ProjectList  ()  {
     },
   ];
     const navigate= useNavigate();
+
    const handleCreateProject=()=>{
     navigate("/create_project")
    }
@@ -59,7 +60,7 @@ export default function ProjectList  ()  {
     const { mutation: deleteMutation } = useDeleteProj(onSuccess);
     useEffect(() => {
       if (deleteMutation?.isSuccess === true) {
-        console.log("successfully created")
+        console.log("Deleted successfully")
         refetchUsers();
       }
     }, [deleteMutation?.isSuccess]);
@@ -68,17 +69,19 @@ export default function ProjectList  ()  {
     // const handleProjectList=()=>{
     //   navigate("/taskForm")
     // }
+    const handleProjectClick=(id:number)=>{
+      console.log("id>>>",typeof(id))
+      navigate(`/taskForm?id=${encodeURIComponent(id)}`)
+
+    }
    return (
     <>
-      <div className="titleBar flex justify-between">
-        <div className="TitleName">
-            Project Name
-        </div>
-        <div>
+      <div className="titleBar flex justify-end">
+        
             <Button type="primary" onClick={()=>handleCreateProject() } className="font-bold">Create Project</Button>
-        </div>
+        
       </div>
-      <div className="HeroContent bg-white mt-6 pt-4 min-h-lvh px-4">  
+      <div className=" bg-white mt-6 pt-4 px-4">  
           <div className="Head grid grid-cols-7  titleFont font-semibold mt-4 table ">
               <div className="bg-gray-200 ps-10 p-3">ID</div>
               <div className="bg-gray-200 py-3 ps-10">Name</div>
@@ -86,11 +89,12 @@ export default function ProjectList  ()  {
               <div className="bg-gray-200  py-3 ps-[35px]">Start Date</div>
               <div className="bg-gray-200 py-3 ps-7 col-span-2">End Date</div>
           </div>
-       
+        <div className="HeroContent">
+
               {/* <div>Progress</div> */}
               {data?.Projects.map((projects:ProjectValues)=>(
                 <>
-                <div className="projectList grid grid-cols-7 ms-2 pt-[28px] pb-[28px]" key={projects.id} >
+                <div className="projectList grid grid-cols-7 ms-2 pt-[28px] pb-[28px]" key={projects.id} onClick={()=>{handleProjectClick(projects.id)}} >
                   <div className="ms-11 " >{projects.id}</div>
                   <div className="ms-7 ">{projects.name}</div>
                   <div className="ms-7 col-span-2 ms-[33px]" >{projects.description}</div>
@@ -110,6 +114,7 @@ export default function ProjectList  ()  {
               )
             )
               }      
+        </div>
       </div>
       
     </>

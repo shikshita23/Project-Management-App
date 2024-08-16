@@ -1,24 +1,25 @@
 import '../App.css'
 import { Route,  createBrowserRouter, createRoutesFromElements } from "react-router-dom";
-import Login from '../Pages/Auth/Login';
 import { Layout } from 'antd';
-import Sidebar from '../Components/Organisms/Sidebar/Sidebar';
-import Headers from '../Components/Organisms/header/Header';
 import { useState } from 'react';
-import Dashboard from '../Pages/Dashboard/Dashboard';
-// import Registration from '../Pages/Auth/Registration';
+import { ContentWrapper } from './Styles';
+import { QueryClientProvider,QueryClient} from 'react-query';
 
+import Dashboard from '../Pages/Dashboard/Dashboard';
 import Portfolio from '../Pages/portfolio/Portfolio';
 //  import Project from '../Pages/project/Project';
 import ProjectList from '../Pages/project/ProjectList';
-import Task from '../Pages/task/TaskList';
+import Task from '../Pages/task/MyTask';
 import Report from '../Pages/report/Report';
 import Registration from '../Pages/Auth/Registration';
-import { ContentWrapper } from './Styles';
-import { QueryClientProvider,QueryClient} from 'react-query';
+import Login from '../Pages/Auth/Login';
+import Sidebar from '../Components/Organisms/Sidebar/Sidebar';
+import Headers from '../Components/Organisms/header/Header';
 import Project from '../Pages/project/Project';
-import TaskForm from '../Pages/task/TaskForm';
+import TaskForm from '../Pages/task/TaskDisplay';
 import Profile from '../Pages/profile/Profile';
+import { AuthHook } from '../Pages/Auth/Hook/useLoginHook';
+
 const {Content} = Layout;
 
 interface protectedProps{
@@ -31,21 +32,28 @@ const ProtectedRoutes = ({children}:protectedProps)=>{
       setCollapsed(!collapsed)
     }
     const queryClient = new QueryClient();
+    const {ownerId}=AuthHook();
+    // const val = ownerId+1;
+    
+    console.log("owner id from auth hook",typeof(ownerId));
   return(
     <>
     <QueryClientProvider client={queryClient}>
-      <Layout>
+      <Layout className='layout'style={{height:"100vh"}}>
         <Headers collapse = {collapse}/>
-        <Layout style={{minHeight:"100vh"}}>
+        <Layout style={{flex:1}}>
               <Sidebar collapsed={collapsed} />          
           <Content>
-            <ContentWrapper>
+            <ContentWrapper className='container' >
               {children}
+           
             </ContentWrapper>
           </Content>
         </Layout>
     </Layout>
     </QueryClientProvider>
+
+
     </>
   )
 }

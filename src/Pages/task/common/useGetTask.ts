@@ -1,9 +1,10 @@
 import {  useQuery } from "react-query";
 import authAxios from "../../../Axios/authAxios";
-export const useGetTask=()=>{
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const useGetTask=(id:number)=>{
     const getTask=async ()=>{
         try{
-            const res=await authAxios.get(`/tasks/show?project_id=${2}`,{
+            const res=await authAxios.get(`/tasks/show?project_id=${id}`,{
                 headers:{
                     Accept:"application/json",
                 },
